@@ -22,3 +22,20 @@ Lưu ý: Không chọn `rtl8139`
 <img src="https://i.imgur.com/JldlR0f.png">
 
 - Sau khi tạo máy ảo, nếu để dhcp, máy ảo sẽ tự lấy ip theo dải vlan tương ứng, tiến hành set ip tĩnh theo dải được cấp
+
+
+**Lưu ý:**
+
+- Đối với những máy ảo cũ (tạo với dải bridge 100), để có thể truy cập tới các dải vlan, cần thêm route trên các máy này
+
+  - Đối với máy ảo có HDH là CentOS:
+
+  `ip route add <dải-vlan> via 192.168.100.29 dev <tên-card-mạng>`
+
+  - Đối với máy ảo có HDH là Ubuntu:
+
+  `route add -net <dải-vlan> netmask 255.255.255.0 gw 192.168.100.29 dev <tên-card-mạng>`
+
+Ví dụ:
+
+`ip route add 192.168.30.0/24 via 192.168.100.29 dev ens3`
